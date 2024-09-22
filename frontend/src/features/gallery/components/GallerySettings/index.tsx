@@ -10,7 +10,6 @@ export default function GallerySettings() {
     <>
       {modalContext}
       <Button
-        style={{ marginLeft: "20px" }}
         onClick={() =>
           modalApi.confirm({
             title: "Settings",

@@ -16,29 +16,45 @@ export default function GalleryTour({
   const steps: TourProps["steps"] = [
     {
       title: "Gallery",
-      description:
-        "This is gallery. It shows pictures that are fetched form the \
-        https://thispersondoesnotexist.com/ website. You can change the picture \
-        (upload PNG file) by clicking on it or droping the file onto the card.",
+      description: (
+        <p>
+          This is a gallery that shows pictures fetched from the
+          https://thispersondoesnotexist.com/ website.
+          <br /> You can change the picture (upload JPG file) by clicking on the
+          card or by dropping the file on it.
+        </p>
+      ),
       target: () => refGallery.current!,
     },
     {
       title: "Pagination",
-      description:
-        "This is custom paginatin component. It allows you to move \
-        through gallery pages and jump to any page.",
+      description: (
+        <p>
+          This is a custom pagination component. It allows you to move through
+          the gallery pages. You can also jump to desired page using 'Go to'
+          component."
+        </p>
+      ),
       target: () => refPagination.current!,
     },
     {
       title: "Settings",
       placement: "left",
-      description:
-        "This is button will bring up app settings. \
-      Settings modal allows you to define a delay between next fetch request.\
-      Setting value around 350-400 ms will ensure image randomness.\
-      This feature was added, bacause the https://thispersondoesnotexist.com/ \
-      seems to be using clock to schedule \
-      new person generation rather than generate new image on every request",
+      description: (
+        <p>
+          This is a button that will bring up app settings. The settings modal
+          allows you to define a delay between next fetch request.
+          <br />
+          Setting value around 400-450 ms will ensure the image randomness.
+          <br />
+          <b>
+            This feature was added, bacause the
+            https://thispersondoesnotexist.com/ seems to use clock to schedule a
+            new person generation rather than generate a new image on an every
+            request.
+          </b>
+        </p>
+      ),
 
       target: () => refSetting.current!,
     },

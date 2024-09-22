@@ -1,3 +1,8 @@
 .mainContainer {
   width: 100%;
 }
+
+.rightContainer {
+  display: flex;
+  gap: 12px;
+}

@@ -27,13 +27,15 @@ export default function Gallery() {
           <div ref={paginationRef}>
             <GalleryPagination page={page} setPage={setPage} />
           </div>
-          <div ref={settingsRef}>
+          <div className="rightContainer">
             <GalleryTour
               refGallery={gallerynRef}
               refPagination={paginationRef}
               refSetting={settingsRef}
             />
-            <GallerySettings />
+            <div ref={settingsRef}>
+              <GallerySettings />
+            </div>
           </div>
         </div>
         <div ref={gallerynRef}>

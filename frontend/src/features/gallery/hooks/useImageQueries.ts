@@ -12,7 +12,6 @@ export const useImageThumbnail = (
   index: number,
   config?: UseImageThumbnailConfigProps
 ) => {
-  // const {delay, notificationApi} = config;
   const [queryEnabled, setQueryEnabled] = useState(config?.delay === undefined);
 
   const queryClient = useQueryClient();
