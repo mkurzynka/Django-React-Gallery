@@ -1,0 +1,19 @@
+.imageCard {
+  width: 248px;
+  height: 248px;
+  display: flex;
+
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+}
+
+.imageCard:hover {
+  background-color: rgba(187, 134, 252, 0.08);
+  border: 1px solid rgba(187, 134, 252, 0.8);
+}
