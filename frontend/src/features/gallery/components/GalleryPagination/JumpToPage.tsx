@@ -18,25 +18,27 @@ export default function JumpToPage({ setPage }: JumpToPageProps) {
   };
 
   return (
-    <Form onFinish={onFinish} form={form} layout="inline">
-      <Form.Item<FieldType>
-        label="Go to"
-        name="goto"
-        validateFirst
-        rules={[
-          {
-            validator: (_, value) =>
-              value !== null && value > 0
-                ? Promise.resolve()
-                : Promise.reject("Value must be greater than 0"),
-          },
-        ]}
-      >
-        <InputNumber style={{ width: 200 }} />
-      </Form.Item>
-      <Button type="primary" htmlType="submit">
-        Go
-      </Button>
-    </Form>
+    <div>
+      <Form onFinish={onFinish} form={form} layout="inline">
+        <Form.Item<FieldType>
+          label="Go to"
+          name="goto"
+          validateFirst
+          rules={[
+            {
+              validator: (_, value) =>
+                value !== null && value > 0
+                  ? Promise.resolve()
+                  : Promise.reject("Value must be greater than 0"),
+            },
+          ]}
+        >
+          <InputNumber style={{ width: 200 }} />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          Go
+        </Button>
+      </Form>
+    </div>
   );
 }

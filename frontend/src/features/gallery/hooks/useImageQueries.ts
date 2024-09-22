@@ -1,16 +1,25 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getImageThumbnail, uploadImage } from "../services/api";
+import { NotificationInstance } from "antd/es/notification/interface";
+import { useState } from "react";
 
-export const useThumbnailQuery = (index: number, enabled: boolean = true) => {
-  return useQuery({
-    queryKey: ["thumbnailImage", index],
-    queryFn: () => getImageThumbnail(index),
-    enabled,
-  });
-};
+interface UseImageThumbnailConfigProps {
+  notificationApi?: NotificationInstance;
+  delay?: number;
+}
 
-export const useImageThumbnail = (index: number) => {
+export const useImageThumbnail = (
+  index: number,
+  config?: UseImageThumbnailConfigProps
+) => {
+  // const {delay, notificationApi} = config;
+  const [queryEnabled, setQueryEnabled] = useState(config?.delay === undefined);
+
   const queryClient = useQueryClient();
+
+  if (config?.delay) {
+    setTimeout(() => setQueryEnabled(true), config?.delay);
+  }
 
   const {
     isPending,
@@ -22,6 +31,7 @@ export const useImageThumbnail = (index: number) => {
     select: (data: Blob) => {
       return URL.createObjectURL(data);
     },
+    enabled: queryEnabled,
   });
 
   const { mutate, isPending: isUploading } = useMutation({
@@ -30,6 +40,12 @@ export const useImageThumbnail = (index: number) => {
     },
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["thumbnailImage", index] }),
+    onError: () => {
+      config?.notificationApi?.error({
+        message: "Upload failed",
+        description: "Make sure that provided image has .jpg extension",
+      });
+    },
   });
 
   const isLoading = isPending || isUploading;

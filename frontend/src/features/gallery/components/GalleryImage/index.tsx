@@ -1,16 +1,22 @@
-import { Empty, Spin } from "antd";
+import { Empty, notification, Spin } from "antd";
 import DropZone from "../DropZone";
 import { useImageThumbnail } from "../../hooks/useImageQueries";
 import "./style.css";
 
 interface GalleryImageProps {
   index: number;
+  delay?: number;
 }
 
-export default function GalleryImage({ index }: GalleryImageProps) {
-  const { handleUpload, isLoading, thumbnail, isError } =
-    useImageThumbnail(index);
+export default function GalleryImage({ index, delay }: GalleryImageProps) {
+  const [api, contextHolder] = notification.useNotification();
 
+  const { handleUpload, isLoading, thumbnail, isError } = useImageThumbnail(
+    index,
+    { notificationApi: api, delay }
+  );
+
+  console.log("render");
   return (
     <Spin spinning={isLoading} tip="Loading image...">
       <div className="imageCard">
@@ -20,6 +26,7 @@ export default function GalleryImage({ index }: GalleryImageProps) {
             <img src={thumbnail} alt={`Thumbnail ${index}`} />
           </DropZone>
         )}
+        {contextHolder}
       </div>
     </Spin>
   );

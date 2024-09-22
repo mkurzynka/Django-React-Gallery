@@ -1,22 +1,19 @@
-import { NUMBER_OF_PICTURES_PER_PAGE } from "../../../../utils/constants";
 import GalleryImage from "../GalleryImage";
 
 import "./style.css";
+import { useGalleryGrid } from "../../hooks/useGalleryGrid";
 
-// const delays = Array(NUMBER_OF_PICTURES_PER_PAGE)
-//   .fill(1)
-//   .map((_item, index) => index * 0);
+interface GalleryGridProps {
+  page: number;
+}
 
-export default function GalleryGrid({ page }: { page: number }) {
-  const indexes = Array(NUMBER_OF_PICTURES_PER_PAGE)
-    .fill(1)
-    .map((_item, index) => (page - 1) * NUMBER_OF_PICTURES_PER_PAGE + index);
-
+export default function GalleryGrid({ page }: GalleryGridProps) {
+  const { delays, indexes } = useGalleryGrid(page);
   return (
     <>
       <div className="container">
-        {indexes.map((index) => (
-          <GalleryImage key={index} index={index} />
+        {indexes.map((index, iter) => (
+          <GalleryImage key={index} index={index} delay={delays[iter]} />
         ))}
       </div>
     </>

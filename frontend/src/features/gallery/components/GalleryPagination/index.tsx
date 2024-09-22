@@ -20,6 +20,7 @@ export default function GalleryPagination({
       <Button onClick={() => setPage((prev) => prev + 1)}>
         <RightOutlined />
       </Button>
+
       <JumpToPage setPage={setPage} />
     </div>
   );
