@@ -1,7 +1,7 @@
 services:
   backend:
     build: ./backend
-    command: ./start.sh
+    command: sh ./start.sh
     volumes:
       - ./backend/:/usr/src/backend/
     ports:

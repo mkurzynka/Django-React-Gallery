@@ -8,7 +8,12 @@
       "program": "${workspaceFolder}/manage.py",
       "args": ["runserver", "localhost:8080"],
       "django": true,
-      "justMyCode": true
+      "justMyCode": true,
+      "envFile": "${workspaceFolder}\\.env",
+      "env": {
+        "DEBUG": "True",
+        "POSTGRES_DB": "None"
+      }
     }
   ]
 }
