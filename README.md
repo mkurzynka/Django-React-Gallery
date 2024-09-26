@@ -1,75 +1,100 @@
 # Django-React-Gallery
-A project that implements a full-stack Django-react application. The application aims to generate and manage images. Images are generated using 3rd party GenAI service.
 
+A full-stack Django-React application for generating and managing images using a 3rd party GenAI service.
 
-# Configuration
-## Docker compose
-This project uses .env file to keep sensitive data. First, create .env file in the root of the project (Django-React-Gallery). The file should include the following parameters:
-
-```
-POSTGRES_USER=hello_django
-POSTGRES_PASSWORD=hello_django
-POSTGRES_DB=hello_django_dev
-
-DEBUG=0
-DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
-SQL_ENGINE=django.db.backends.postgresql
-
-SECRET=my-secure-key
-
-SQL_HOST=db
-SQL_PORT=5432
-
-DJANGO_CORS_WHITELIST=http://localhost:3000 http://localhost:8000
-DJANGO_CSRF_WHITELIST=http://localhost:3000 http://localhost:8000
-
-```
-
-Some of these parameters are customizable (DB credentials, secret, etc). You can copy those params and paste them into the created .env file.
-
-Ensure you have docker and docker-compose installed and available in your cmd. And run following command:
-```
-docker-compose build
-```
-
-and then
-
-```
-docker-compose up -d
-```
-
-The application should be served on localhost:3000.
+## Table of Contents
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Running the Application](#running-the-application)
+- [Testing](#testing)
+- [API Documentation](#api-documentation)
 
 
 
+## Features
+- Image generation using https://thispersondoesnotexist.com/
+- The application displays images in the form of a gallery
+- Gallery comes with infinite pagination
+- Whenever the backend is asked for a picture with an index that does not exist yet it downloads a new image from the  https://thispersondoesnotexist.com/
+- Existing images can be switched, to do that user has to click on the image or drag and drop the image in the JPG file format.
+- Frontend comes with 'Tour' (Begin tour button) that explains UI and its features
 
+## Prerequisites
+- Docker and Docker Compose
+- Node.js and npm (for local frontend development)
+- Python 3.12 (for local backend development)
 
-## Without docker compose 
-First, create a venv with Python 3.12 and activate it
-```
-cd backend
-path_to_python -m venv venv
-.\venv\Scripts\activate
-```
+## Installation
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/Django-React-Gallery.git
+   cd Django-React-Gallery
+   ```
 
-Next, install dependecies and run migrations
-```
-pip install -r .\requirements.txt
-py .\manage.py migrate
-```
+2. Create a `.env` file in the root directory with the following content:
+   ```
+   DEBUG=0
+   POSTGRES_USER=hello_django
+   POSTGRES_PASSWORD=hello_django
+   POSTGRES_DB=hello_django_dev
+   SQL_PORT=5432
+   SQL_HOST=db
+   SQL_ENGINE=django.db.backends.postgresql
+   SECRET_KEY=my-secure-key
+   ```
+   Note: Customize these values as needed, especially the `SECRET_KEY`.
 
-Now you can run BE server using
-```
-py .\manage.py runserver
-```
+## Configuration
+The project uses Docker Compose for easy setup and deployment. Make sure you have Docker and Docker Compose installed on your system.
 
-### Tests
-To run tests additional packages are required. You can install them using pip.
-```
-pip install pytest pytest-django pytest-mock
-```
+## Running the Application
+1. Build the Docker images:
+   ```
+   docker-compose build
+   ```
 
-To run tests run following command
-```
-pytest
-```
+2. Start the containers:
+   ```
+   docker-compose up -d
+   ```
+
+3. Access the application at `http://localhost:3000`
+
+## Testing
+
+### Backend Tests
+1. Install the required packages:
+   ```
+   pip install pytest pytest-django pytest-mock
+   ```
+
+2. Run the tests:
+   ```
+   pytest
+   ```
+
+### Frontend Tests
+The frontend uses Vitest for testing.
+
+1. Navigate to the frontend directory:
+   ```
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Run the tests:
+   ```
+   npm run test
+   ```
+
+## API Documentation
+- /gallery/preview/{index} - Returns a preview (200x200) image for a given index.
+
+- /gallery/{index} - Allows the user to set the image displayed at a given index in the gallery using PUT method.
+

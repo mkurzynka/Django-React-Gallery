@@ -16,7 +16,6 @@ export default function GalleryImage({ index, delay }: GalleryImageProps) {
     { notificationApi: api, delay }
   );
 
-  console.log("render");
   return (
     <Spin spinning={isLoading} tip="Loading image...">
       <div className="imageCard">
