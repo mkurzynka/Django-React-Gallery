@@ -6,13 +6,16 @@
       "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/manage.py",
-      "args": ["runserver", "localhost:8080"],
+      "args": ["runserver", "localhost:8000"],
       "django": true,
       "justMyCode": true,
       "envFile": "${workspaceFolder}\\.env",
       "env": {
         "DEBUG": "True",
-        "POSTGRES_DB": "None"
+        "DJANGO_ALLOWED_HOSTS": "localhost 127.0.0.1 [::1]",
+        "DJANGO_CORS_WHITELIST": "http://localhost:3000 http://localhost:8000",
+        "DJANGO_CSRF_WHITELIST": "http://localhost:3000 http://localhost:8000",
+        "SECRET": "SECRET=django-insecure-c25(*y@p4q8^yjj06aql(0*y4(j!ccmx6gusg3#caz1li9(ll)"
       }
     }
   ]
